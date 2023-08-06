@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Models\" />
+    <Folder Include="Features\Starships\Commands\Delete\" />
+    <Folder Include="Features\Starships\Commands\Update\" />
+    <Folder Include="Features\Starships\Constants\" />
+    <Folder Include="Features\Starships\Rules\" />
+    <Folder Include="Features\Starships\Profiles\" />
+    <Folder Include="Features\Starships\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.1.1" />
+  </ItemGroup>
+
+</Project>
