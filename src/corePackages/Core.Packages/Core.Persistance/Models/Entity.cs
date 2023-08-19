@@ -2,7 +2,7 @@
 
 namespace Core.Persistance.Models
 {
-    public class Entity<TId>
+    public class Entity<TId> : IEntityTimestamps
     {
         public Entity()
         {
@@ -14,10 +14,10 @@ namespace Core.Persistance.Models
             Id = id;
         }
         public TId Id { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
         public int? Creator { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public DateTime? DeletedDate { get; set; }
 
-        
     }
 }

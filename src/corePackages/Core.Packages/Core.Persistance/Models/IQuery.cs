@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Persistance.Models
 {
-    public class IQuery<T>
+    public interface IQuery<T>
     {
         IQueryable<T> Query();
     }

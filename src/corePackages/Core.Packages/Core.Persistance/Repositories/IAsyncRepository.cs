@@ -3,11 +3,10 @@ using Core.Persistance.Models;
 using Core.Persistance.Paging;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Core.Persistance.Repositories
 {
-    public interface IAsyncRepository<TEntity, TEntityId>: IQueryable<TEntity>
+    public interface IAsyncRepository<TEntity, TEntityId>: IQuery<TEntity>
         where TEntity : Entity<TEntityId>
     {
         Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate,
@@ -45,6 +44,7 @@ namespace Core.Persistance.Repositories
 
         Task<TEntity> InsertAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);
+        Task DeleteAsync(TEntity entity,bool permanent = false);
 
         Task<ICollection<TEntity>> BulkInsertAsync(ICollection<TEntity> entities);
         Task<ICollection<TEntity>> BulkUpdateAsync(ICollection<TEntity> entities);
