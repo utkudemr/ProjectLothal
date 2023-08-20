@@ -24,7 +24,7 @@ namespace Core.Persistance.Paging
                 PageIndex = index,
                 Count = pageCount,
                 Size = size,
-                Pages = (int)Math.Ceiling(pageCount / (double)pageCount)
+                Pages = (int)Math.Ceiling(pageCount / (double)size)
             };
             return list;
         }

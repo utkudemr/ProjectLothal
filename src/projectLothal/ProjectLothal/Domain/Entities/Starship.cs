@@ -14,6 +14,6 @@ namespace Domain.Entities
             Id = id;
             Name = name;
         }
-        public required string Name { get; set; }
+        public  string Name { get; set; }
     }
 }
