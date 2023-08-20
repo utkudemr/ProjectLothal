@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Models\" />
-    <Folder Include="Features\Starships\Commands\Delete\" />
-    <Folder Include="Features\Starships\Commands\Update\" />
     <Folder Include="Features\Starships\Constants\" />
     <Folder Include="Features\Starships\Rules\" />
   </ItemGroup>

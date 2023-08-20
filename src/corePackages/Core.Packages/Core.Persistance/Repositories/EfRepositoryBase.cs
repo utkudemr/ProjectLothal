@@ -37,11 +37,12 @@ namespace Core.Persistance.Repositories
             return entities;
         }
 
-        public async Task DeleteAsync(TEntity entity, bool permanent = false)
+        public async Task<TEntity> DeleteAsync(TEntity entity, bool permanent = false)
         {
             if (permanent == false)
             {
                 EntityHasOneToOneRelation(entity);
+                await SetEntitySoftDeletedAsync(entity);
                 await context.SaveChangesAsync();
             }
                
@@ -49,6 +50,7 @@ namespace Core.Persistance.Repositories
             {
                 context.Remove(entity);
             }
+            return entity;
         }
 
         protected void EntityHasOneToOneRelation(TEntity entity)
@@ -58,7 +60,7 @@ namespace Core.Persistance.Repositories
                 a => a.DependentToPrincipal?.IsCollection == true
                 || a.PrincipalToDependent?.IsCollection == true
                 || a.DependentToPrincipal?.ForeignKey.DeclaringEntityType.ClrType == entity.GetType()) == false;
-            if (hasEntityOneToOneRelation == false) throw new ArgumentException("You can not soft delete when entity has one to one relation");
+            if (hasEntityOneToOneRelation) throw new ArgumentException("You can not soft delete when entity has one to one relation");
         }
 
         protected async Task SetEntitySoftDeletedAsync(IEntityTimestamps entity)

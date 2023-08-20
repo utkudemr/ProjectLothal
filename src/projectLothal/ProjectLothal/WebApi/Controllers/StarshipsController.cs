@@ -1,4 +1,6 @@
-﻿using Application.Features.Starships.Queries.GetList;
+﻿using Application.Features.Starships.Commands.Delete;
+using Application.Features.Starships.Commands.Update;
+using Application.Features.Starships.Queries.GetList;
 using Application.Features.Starships.Queries.GeyById;
 using Business.Features.Starships.Commands.Create;
 using Core.Application.Requests;
@@ -32,6 +34,20 @@ namespace WebApi.Controllers
         {
             GetByIdStarshipQuery getListStarshipQuery = new GetByIdStarshipQuery() { Id = id };
             var response = await Mediator.Send(getListStarshipQuery);
+            return Ok(response);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateStarshipCommand request)
+        {
+            var response = await Mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var response = await Mediator.Send(new DeleteStarshipCommand { Id=id});
             return Ok(response);
         }
     }

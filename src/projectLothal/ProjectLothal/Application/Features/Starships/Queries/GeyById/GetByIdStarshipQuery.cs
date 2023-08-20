@@ -21,7 +21,7 @@ namespace Application.Features.Starships.Queries.GeyById
 
             public async Task<GetByIdStarshipResponse> Handle(GetByIdStarshipQuery request, CancellationToken cancellationToken)
             {
-                var starship= await _starshipRepository.GetAsync(predicate: b => b.Id == request.Id,cancellationToken:cancellationToken);
+                var starship= await _starshipRepository.GetAsync(predicate: b => b.Id == request.Id,cancellationToken:cancellationToken,withDeleted:true);
                 var starshipResponse= _mapper.Map<GetByIdStarshipResponse>(starship);
                 return starshipResponse;
             }

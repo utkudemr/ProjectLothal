@@ -45,7 +45,7 @@ namespace Core.Persistance.Repositories
 
         Task<TEntity> InsertAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);
-        Task DeleteAsync(TEntity entity,bool permanent = false);
+        Task<TEntity> DeleteAsync(TEntity entity,bool permanent = false);
 
         Task<ICollection<TEntity>> BulkInsertAsync(ICollection<TEntity> entities);
         Task<ICollection<TEntity>> BulkUpdateAsync(ICollection<TEntity> entities);
