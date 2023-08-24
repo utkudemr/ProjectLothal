@@ -11,6 +11,9 @@ namespace Persistance.Contexts
     {
         public IConfiguration Configuration { get; set; }
         public DbSet<Starship> Starships { get; set; }
+        public DbSet<Person> Peoples { get; set; }
+        public DbSet<Film> Films { get; set; }
+        public DbSet<Planet> Planets { get; set; }
         public BaseDbContext(DbContextOptions options,IConfiguration configuration):base(options)
         {
             Configuration = configuration;
