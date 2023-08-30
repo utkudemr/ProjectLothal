@@ -8,7 +8,7 @@ namespace Persistance.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Planet> builder)
         {
-            builder.ToTable("Films").HasKey(a => a.Id);
+            builder.ToTable("Planets").HasKey(a => a.Id);
             builder.Property(a => a.Id).HasColumnName("Id").IsRequired();
             builder.Property(a => a.Name).HasColumnName("Name").IsRequired();
             builder.Property(a => a.ImageUrl).HasColumnName("ImageUrl").IsRequired();

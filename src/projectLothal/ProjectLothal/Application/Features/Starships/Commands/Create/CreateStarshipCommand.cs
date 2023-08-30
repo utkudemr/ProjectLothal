@@ -1,4 +1,5 @@
 ﻿using Application.Features.Starships.Commands.Create;
+using Application.Features.Starships.Rules;
 using Application.Services;
 using AutoMapper;
 using Domain.Entities;
@@ -15,16 +16,20 @@ namespace Business.Features.Starships.Commands.Create
         {
             private readonly IStarshipRepository _starshipRepository;
             private readonly IMapper _mapper;
-
-            public CreateStarshipCommandHandler(IStarshipRepository starshipRepository, IMapper mapper)
+            private readonly StarshipBusinessRules _starshipBusinessRules;
+            public CreateStarshipCommandHandler(IStarshipRepository starshipRepository, IMapper mapper, StarshipBusinessRules starshipBusinessRules)
             {
                 _starshipRepository = starshipRepository;
                 _mapper = mapper;
+                _starshipBusinessRules = starshipBusinessRules;
             }
             public async Task<CreatedStarshipResponse> Handle(CreateStarshipCommand request, CancellationToken cancellationToken)
             {
+                await _starshipBusinessRules.StarshipNameCanNotBeDuplicatedWhenInsert(request.Name);
+
                 Starship starship = _mapper.Map<Starship>(request);
                 starship.Id=Guid.NewGuid();
+
                 var result= await _starshipRepository.InsertAsync(starship);
 
                 var starShipResponse = _mapper.Map<CreatedStarshipResponse>(result);

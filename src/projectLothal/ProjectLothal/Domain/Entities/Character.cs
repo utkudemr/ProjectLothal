@@ -1,6 +1,4 @@
 ﻿using Core.Persistance.Models;
-using System.Xml.Linq;
-
 namespace Domain.Entities;
 
 public class Character : Entity<Guid>
