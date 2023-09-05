@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using FluentValidation;
 using Core.Application.Pipelines.Validation;
+using Core.Application.Pipelines.Transaction;
 
 namespace Application
 {
@@ -17,6 +18,7 @@ namespace Application
             {
                 configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
+                configuration.AddOpenBehavior(typeof(TransactionRequestBehavior<,>));
             });
             return services;
         }

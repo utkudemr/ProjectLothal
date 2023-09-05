@@ -2,6 +2,7 @@
 using Application.Features.Starships.Rules;
 using Application.Services;
 using AutoMapper;
+using Core.Application.Pipelines.Transaction;
 using Domain.Entities;
 using MediatR;
 
@@ -12,7 +13,7 @@ namespace Business.Features.Starships.Commands.Create
         public string Name { get; set; }
 
 
-        public class CreateStarshipCommandHandler : IRequestHandler<CreateStarshipCommand, CreatedStarshipResponse>
+        public class CreateStarshipCommandHandler : IRequestHandler<CreateStarshipCommand, CreatedStarshipResponse>, ITransactionalRequest
         {
             private readonly IStarshipRepository _starshipRepository;
             private readonly IMapper _mapper;
