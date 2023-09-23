@@ -1,21 +1,23 @@
 ﻿using Application.Services;
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Requests;
 using Core.Application.Responses;
-using Core.Persistance.Paging;
-using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Application.Features.Starships.Queries.GetList;
 
-public class GetListStarshipQuery:IRequest<GetListResponse<GetListStarshipListItemDto>>
+public class GetListStarshipQuery:IRequest<GetListResponse<GetListStarshipListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
+
+    public string CacheKey => $"GetListStarshipQuery({PageRequest.PageIndex},{PageRequest.PageSize})";
+
+    public bool ByPassCache { get; }
+
+    public TimeSpan? SlidingExpiration { get; }
+
+    public string? CacheGroupKey => "GetStarships";
+
     public class GetListStarshipQueryHandler : IRequestHandler<GetListStarshipQuery, GetListResponse<GetListStarshipListItemDto>>
     {
         private readonly IStarshipRepository _starshipRepository;

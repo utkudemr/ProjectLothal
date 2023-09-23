@@ -1,13 +1,18 @@
 ﻿using Application.Services;
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 
 namespace Application.Features.Starships.Commands.Update
 {
-    public class UpdateStarshipCommand:IRequest<UpdateStarshipResponse>
+    public class UpdateStarshipCommand:IRequest<UpdateStarshipResponse>, ICacheRemoverRequest
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string CacheKey => "";
+
+        public bool ByPassCache => false;
+        public string? CacheGroupKey => "GetStarships";
         public class UpdateStarshipCommandHandler : IRequestHandler<UpdateStarshipCommand, UpdateStarshipResponse>
         {
             private readonly IStarshipRepository _starshipRepository;

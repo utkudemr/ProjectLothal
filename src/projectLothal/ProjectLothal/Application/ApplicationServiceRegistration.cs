@@ -4,6 +4,7 @@ using System.Reflection;
 using FluentValidation;
 using Core.Application.Pipelines.Validation;
 using Core.Application.Pipelines.Transaction;
+using Core.Application.Pipelines.Caching;
 
 namespace Application
 {
@@ -19,6 +20,8 @@ namespace Application
                 configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
                 configuration.AddOpenBehavior(typeof(TransactionRequestBehavior<,>));
+                configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
+                configuration.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
             });
             return services;
         }
