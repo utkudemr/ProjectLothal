@@ -5,6 +5,9 @@ using FluentValidation;
 using Core.Application.Pipelines.Validation;
 using Core.Application.Pipelines.Transaction;
 using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Logging;
+using Core.CrossCuttingConcerns.SeriLog;
+using Core.CrossCuttingConcerns.SeriLog.Logger;
 
 namespace Application
 {
@@ -22,7 +25,11 @@ namespace Application
                 configuration.AddOpenBehavior(typeof(TransactionRequestBehavior<,>));
                 configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
                 configuration.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
+                configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
             });
+
+            //services.AddSingleton<BaseLoggerService, FileLogger>();
+            services.AddSingleton<BaseLoggerService, MsSqlLogger>();
             return services;
         }
 

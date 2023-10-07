@@ -3,13 +3,14 @@ using Application.Features.Starships.Rules;
 using Application.Services;
 using AutoMapper;
 using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using Domain.Entities;
 using MediatR;
 
 namespace Business.Features.Starships.Commands.Create
 {
-    public class CreateStarshipCommand : IRequest<CreatedStarshipResponse>, ITransactionalRequest, ICacheRemoverRequest
+    public class CreateStarshipCommand : IRequest<CreatedStarshipResponse>, ITransactionalRequest, ICacheRemoverRequest, ILoggableRequest
     {
         public string Name { get; set; }
 

@@ -1,12 +1,13 @@
 ﻿using Application.Services;
 using AutoMapper;
 using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Logging;
 using Core.Application.Requests;
 using Core.Application.Responses;
 using MediatR;
 namespace Application.Features.Starships.Queries.GetList;
 
-public class GetListStarshipQuery:IRequest<GetListResponse<GetListStarshipListItemDto>>, ICachableRequest
+public class GetListStarshipQuery:IRequest<GetListResponse<GetListStarshipListItemDto>>, ICachableRequest, ILoggableRequest
 {
     public PageRequest PageRequest { get; set; }
 
